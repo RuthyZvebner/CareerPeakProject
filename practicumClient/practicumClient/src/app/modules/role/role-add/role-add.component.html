@@ -1,0 +1,47 @@
+<form class="row g-3" [formGroup]="addRoleForm">
+
+    <label>Role Name</label>
+    <select class="form-select" aria-label="Default select example" formControlName="roleName">
+        <option *ngFor="let roleName of getRoleNameOptionsKey()">
+            {{roleName}}
+        </option>
+    </select>
+
+
+    <label>Is Managerial</label>
+    <div>
+        <input type="radio" id="managerialTrue" [value]="true" formControlName="isManagerial">
+        <label for="managerialTrue">True</label>
+        <input type="radio" id="managerialFalse" [value]="false" formControlName="isManagerial">
+        <label for="managerialFalse">False</label>
+        
+        <ng-container
+        *ngIf="addRoleForm.controls['isManagerial'].errors&&(addRoleForm.controls['isManagerial'].touched||addRoleForm.controls['isManagerial'].dirty)">
+        <div *ngIf="addRoleForm.controls['isManagerial'].errors?.['invalidIsManagerial']" class="error-message">
+            Please select whether the role is managerial or not.
+        </div>
+        </ng-container>
+        
+    </div>
+
+
+    <div class="form-group">
+        <label for="startRoleDate">Start Role Date:</label>
+        <input type="date" id="startRoleDate" class="form-control" formControlName="startRoleDate" required="">
+        <ng-container
+            *ngIf="addRoleForm.controls['startRoleDate'].errors&&(addRoleForm.controls['startRoleDate'].touched||addRoleForm.controls['startRoleDate'].dirty)">
+            <div *ngIf="addRoleForm.controls['startRoleDate'].errors['required']" class="error-message">This Field Is
+                Required
+            </div>
+            <div *ngIf="addRoleForm.controls['startRoleDate'].errors?.['invalidStartDate']" class="error-message">
+                Start Date Must Be After Or Equal To The Start Date Of Work.
+            </div>            
+        </ng-container>
+    </div>
+
+
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary" (click)="sendRoleToWorker()"
+            [disabled]="addRoleForm.invalid">Save Role</button>
+    </div>
+</form>

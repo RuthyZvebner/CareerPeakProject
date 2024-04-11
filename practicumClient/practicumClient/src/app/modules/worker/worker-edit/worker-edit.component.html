@@ -1,0 +1,197 @@
+<div class="modal-content">
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <form class="row g-3" [formGroup]="editWorkerForm" (ngSubmit)="updateWorker()">
+        <div id="cardDiv">
+            <h3>Update Worker Details</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="#89c5ad" class="bi bi-person-vcard"
+                viewBox="0 0 16 16">
+                <path
+                    d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+                <path
+                    d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
+            </svg>
+        </div>
+
+        <div class="flexDiv">
+            <div class="form-floating mb-3">
+                <input class="form-control" type="number" aria-label="default input example" formControlName="idNumber">
+                <label class="label" for="floatingInput">Id Number</label>
+                <ng-container
+                    *ngIf="editWorkerForm.controls['idNumber'].errors && (editWorkerForm.controls['idNumber'].touched || editWorkerForm.controls['idNumber'].dirty)">
+                    <div class="error-message" *ngIf="editWorkerForm.controls['idNumber'].errors['required']">
+                        This Field
+                        Is Required</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['idNumber'].errors['minlength']">
+                        At least
+                        9
+                        characters</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['idNumber'].errors['maxlength']">
+                        Maximum 9
+                        characters</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['idNumber'].errors['pattern']">
+                        Invalid
+                        identity number</div>
+                </ng-container>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="password" aria-label="default input example"
+                    formControlName="password">
+                <label class="label" for="floatingInput">Password</label>
+                <ng-container *ngIf="editWorkerForm.controls['password'].errors&&
+                (editWorkerForm.controls['password'].touched||editWorkerForm.controls['password'].dirty)">
+                    <div class="error-message" *ngIf="editWorkerForm.controls['password'].errors['required']"
+                        class="error-message">This FieldIs
+                        Required</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['password'].errors['maxlength']"
+                        class="error-message">Minimum 2
+                        characters</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['password'].errors['pattern']"
+                        class="error-message">Invalid
+                        Password
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+
+        <div class="flexDiv">
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" aria-label="default input example" formControlName="firstName">
+                <label for="floatingInput" class="label">First Name</label>
+                <ng-container *ngIf="editWorkerForm.controls['firstName'].errors&&
+                (editWorkerForm.controls['firstName'].touched||editWorkerForm.controls['firstName'].dirty)">
+                    <div class="error-message" *ngIf="editWorkerForm.controls['firstName'].errors['required']"
+                        class="error-message">This Field
+                        Is
+                        Required</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['firstName'].errors['maxlength']"
+                        class="error-message">Minimum 2
+                        characters</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['firstName'].errors['pattern']"
+                        class="error-message">Invalid
+                        Name
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input class="form-control" type="text" aria-label="default input example" formControlName="lastName">
+                <label for="floatingInput" class="label">Last Name</label>
+                <ng-container *ngIf="editWorkerForm.controls['lastName'].errors&&
+            (editWorkerForm.controls['lastName'].touched||editWorkerForm.controls['lastName'].dirty)">
+                    <div class="error-message" *ngIf="editWorkerForm.controls['lastName'].errors['required']"
+                        class="error-message">This Field
+                        Is
+                        Required</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['lastName'].errors['maxlength']"
+                        class="error-message">Minimum 2
+                        characters</div>
+                    <div class="error-message" *ngIf="editWorkerForm.controls['lastName'].errors['pattern']"
+                        class="error-message">Invalid Name
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+
+        <div class="flexDiv">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="startDate" formControlName="startDate"
+                    onfocus="(this.type='date')">
+                <label for="floatingInputStartDate" class="label">Working Start Date</label>
+                <ng-container *ngIf="editWorkerForm.controls['startDate'].errors 
+                &&(editWorkerForm.controls['startDate'].touched||editWorkerForm.controls['startDate'].dirty)">
+                    <div *ngIf="editWorkerForm.controls['startDate'].errors['required']" class="error-message">
+                        This
+                        field is
+                        required</div>
+                </ng-container>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="dateOfBirth" formControlName="dateOfBirth"
+                    onfocus="(this.type='date')">
+                <label for="floatingInput" class="label">Date Of Birth</label>
+                <ng-container *ngIf="editWorkerForm.controls['dateOfBirth'].errors 
+                &&(editWorkerForm.controls['dateOfBirth'].touched||editWorkerForm.controls['dateOfBirth'].dirty)">
+                    <div *ngIf="editWorkerForm.controls['dateOfBirth'].errors['required']" class="error-message">This
+                        field
+                        is
+                        required</div>
+                </ng-container>
+            </div>
+
+            <div class="columnDiv">
+                <label id="labelDiv" class="label">Gender</label>
+                <select class="form-select" aria-label="Default select example" formControlName="gender">
+                    <option *ngFor="let genderKey of getGenderKeys()">
+                        {{ genderKey}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="flexDiv">
+            <div *ngIf="true">
+                <div *ngFor="let roleOptionKey of getRoleNameOptions()">
+                    <label>{{ roleOptionKey }}</label>
+                    <div id="buttonFunctions">
+                        <button [hidden]="workerRolesNumber[getValueFromEnum(roleOptionKey!)-1]==false" type="button"
+                            class="btn btn-danger" (click)="deleteRole(roleOptionKey!)">Delete</button>
+                        <button [hidden]="workerRolesNumber[getValueFromEnum(roleOptionKey!)-1]==false" type="button"
+                            class="btn btn-primary" (click)="editRole(roleOptionKey!)">Edit</button>
+                        <button [hidden]="workerRolesNumber[getValueFromEnum(roleOptionKey!)-1]==true" type="button"
+                            class="btn btn-success" (click)="addRole(roleOptionKey!)">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="editWorkerForm.invalid">Update Worker</button>
+
+        <form *ngIf="IsEditRole" class="row g-3" [formGroup]="editRoleForm">
+            <div id="gridForm">
+                <label class="label">Is Managerial</label>
+                <div>
+                    <input type="radio" id="managerialTrue" [value]="true" formControlName="isManagerial">
+                    <label class="label" for="managerialTrue">True</label>
+                    <input type="radio" id="managerialFalse" [value]="false" formControlName="isManagerial">
+                    <label class="label" for="managerialFalse">False</label>
+
+                    <ng-container
+                        *ngIf="editRoleForm.controls['isManagerial'].errors&&(editRoleForm.controls['isManagerial'].touched||editRoleForm.controls['isManagerial'].dirty)">
+                        <div *ngIf="editRoleForm.controls['isManagerial'].errors?.['invalidIsManagerial']"
+                            class="error-message">
+                            Please select whether the role is managerial or not.
+                        </div>
+                    </ng-container>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="label" for="startRoleDate">Start Role Date:</label>
+                    <input type="date" id="startRoleDate" class="form-control" formControlName="startRoleDate"
+                        required="">
+                    <ng-container
+                        *ngIf="editRoleForm.controls['startRoleDate'].errors&&(editRoleForm.controls['startRoleDate'].touched||editRoleForm.controls['startRoleDate'].dirty)">
+                        <div *ngIf="editRoleForm.controls['startRoleDate'].errors['required']" class="error-message">
+                            This Field Is Required
+                        </div>
+                        <div *ngIf="editRoleForm.controls['startRoleDate'].errors?.['invalidStartDate']"
+                            class="error-message">
+                            Start Date Must Be After Or Equal To The Start Date Of Work.
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <button class="btn btn-primary" [hidden]="!isRoleEdit" (click)="saveRoleChanges()">Save Changes</button>
+            <button class="btn btn-primary" [hidden]="!isRoleAdd" (click)="saveAddRole()">Save Changes</button>
+        </form>
+    </form>
+</div>

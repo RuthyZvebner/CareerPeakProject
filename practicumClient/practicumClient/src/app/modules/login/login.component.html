@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h5 class="modal-title">Login</h5>
+</div>
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="modal-body">
+  <div class="container">
+
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="firstName" formControlName="firstName">
+        <ng-container *ngIf="loginForm.controls['firstName'].errors&&
+          (loginForm.controls['firstName'].touched||loginForm.controls['firstName'].dirty)">
+          <div class="div-warning" *ngIf="loginForm.controls['firstName'].errors['required']">This Field Is Required
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="lastName" formControlName="lastName">
+        <ng-container
+          *ngIf="loginForm.controls['lastName'].errors&&(loginForm.controls['lastName'].touched||loginForm.controls['lastName'].dirty)">
+          <div class="div-warning" *ngIf="loginForm.controls['lastName'].errors['required']">This Field Is Required
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="password" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" id="password" formControlName="password">
+        <ng-container
+          *ngIf="loginForm.controls['password'].errors&&(loginForm.controls['password'].touched||loginForm.controls['password'].dirty)">
+          <div class="div-warning" *ngIf="loginForm.controls['password'].errors['required']">This Field Is Required
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-center">
+    <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+  </div>
+
+  <ng-container *ngIf="!(loginForm.controls['password'].touched||loginForm.controls['password'].dirty)||
+  (loginForm.controls['firstName'].touched||loginForm.controls['firstName'].dirty)||
+  (loginForm.controls['lastName'].touched||loginForm.controls['lastName'].dirty)">
+    <div *ngIf="divMessage" id="divAlert" class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16" role="img" aria-label="Danger:">
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+      </svg>
+      <div>
+        Enter Correct Values
+      </div>
+    </div>
+  </ng-container>
+</form>
